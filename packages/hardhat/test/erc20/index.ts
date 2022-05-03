@@ -16,7 +16,7 @@ const token = {
   name: "GDB Token",
   symbol: "GDB",
   decimals: 18,
-  totalSupply: 1_000_000, //ethers.BigNumber.from(10).pow(18).mul(1_000_000), // 1 million actual tokens * (10**18)
+  totalSupply: 1_000_000,
 };
 
 export const deploy = async ({

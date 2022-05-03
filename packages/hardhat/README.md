@@ -44,3 +44,31 @@ npx hardhat verify --network ropsten DEPLOYED_CONTRACT_ADDRESS "Hello, Hardhat!"
 # Performance optimizations
 
 For faster runs of your tests and scripts, consider skipping ts-node's type checking by setting the environment variable `TS_NODE_TRANSPILE_ONLY` to `1` in hardhat's environment. For more details see [the documentation](https://hardhat.org/guides/typescript.html#performance-optimizations).
+
+## Deploy Localhost
+
+Add Localhost Network to Metamask if missing:
+
+- name: localhost
+- rpc url: http://localhost:8545
+- chain id: 1337
+
+### Add Hardhat accounts to play with
+
+```
+npx hardhat node
+```
+
+Take note and import wallets into metamask via their private keys.
+
+### Deploy
+
+```
+npx hardhat run scripts/deploy-erc20.ts --network localhost
+```
+
+Take note of the resulting deployment contract address.
+
+Hardhat will use Account #0 as deployer, hence total supply will be assigned to this account.
+
+Import assets into Metamask using the contract address it was deployed to, token balance will then show up.
