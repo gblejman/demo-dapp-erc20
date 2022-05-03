@@ -2,6 +2,13 @@
   "name": "@demo-dapp-erc20/hardhat",
   "version": "1.0.0",
   "private": true,
+  "scripts": {
+    "node": "npx hardhat node",
+    "compile": "npx hardhat compile",
+    "test": "npx hardhat test",
+    "deploy:erc20:localhost": "npx hardhat run scripts/deploy-erc20.ts --network localhost",
+    "deploy:erc20:ropsten": "npx hardhat run scripts/deploy-erc20.ts --network ropsten"
+  },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.5",
     "@nomiclabs/hardhat-etherscan": "^3.0.3",
