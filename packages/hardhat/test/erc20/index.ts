@@ -1,30 +1,24 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
 // type defs
-import { BigNumberish } from "ethers";
 import { ERC20 } from "../../typechain";
 import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
 
 type Token = {
   name: string;
   symbol: string;
-  decimals: BigNumberish;
-  totalSupply: BigNumberish;
+  decimals: number;
+  totalSupply: number;
 };
 
 const token = {
-  name: "GDB Token",
-  symbol: "GDB",
+  name: "Token",
+  symbol: "T",
   decimals: 18,
   totalSupply: 1_000_000,
 };
 
-export const deploy = async ({
-  name,
-  symbol,
-  decimals,
-  totalSupply,
-}: Token) => {
+const deploy = async ({ name, symbol, decimals, totalSupply }: Token) => {
   const factory = await ethers.getContractFactory("ERC20");
   const contract = await factory.deploy(name, symbol, decimals, totalSupply);
   await contract.deployed();
@@ -74,7 +68,7 @@ describe("ERC20", () => {
       );
     });
 
-    it("Should fail if total supply is empty", async () => {
+    it("Should fail if total supply is 0", async () => {
       await expect(deploy({ ...token, totalSupply: 0 })).to.be.revertedWith(
         "ERC20: Token total supply must be positive"
       );
