@@ -122,26 +122,41 @@ describe("ERC20Faucet", () => {
         .to.emit(tokenContract, "Transfer")
         .withArgs(faucetContract.address, account1.address, drip);
 
-      // TODO: use proper block.timestamp advancement test tools to actually test 1 minute in the future without halting tests
-      // simulate a little bit of delay before next request
-      await delay(10);
-
+      // 2nd immediate request should fail
       await expect(
         faucetContract.connect(account1).request()
       ).to.be.revertedWith("ERC20Faucet: Wait 1 minute");
+    });
+
+    it("Should succeed if more than 1 minute has passed since last request", async () => {
+      const value = 1000;
+
+      expect(await tokenContract.balanceOf(faucetContract.address)).to.equal(0);
+      expect(await tokenContract.balanceOf(account1.address)).to.equal(0);
+
+      await tokenContract.transfer(faucetContract.address, value);
+
+      // 1st request should pass
+      expect(await faucetContract.connect(account1).request())
+        .to.emit(tokenContract, "Transfer")
+        .withArgs(faucetContract.address, account1.address, drip);
+
+      await increaseTime(60 + 1);
+
+      // 2nd request should pass after 1 minute
+      expect(await faucetContract.connect(account1).request())
+        .to.emit(tokenContract, "Transfer")
+        .withArgs(faucetContract.address, account1.address, drip);
     });
   });
 });
 
 /**
- * Resolve with data after ms
- * @param ms timeout
- * @param data the data to resolve with
- * @returns a promise
+ * Adds number of seconds to the latest block
+ * TODO: research proper block.timestamp advancement test tools, not sure if this affects the next test run globally
+ * @param seconds the number of seconds to advance in time
  */
-const delay = (ms: number, data?: unknown) =>
-  new Promise((resolve) =>
-    setTimeout(() => {
-      resolve(data);
-    }, ms)
-  );
+const increaseTime = async (seconds: number): Promise<void> => {
+  await ethers.provider.send("evm_increaseTime", [seconds]);
+  await ethers.provider.send("evm_mine", []);
+};
