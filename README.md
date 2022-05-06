@@ -4,55 +4,18 @@
 - /packages/app: frontend dapp
 - /packages/harhat: contracts
 
-# Workspace creation
+# Live
 
-- create root package.json
+## Dapp
 
-```json
-{
-  "private": true,
-  "workspaces": ["packages/*"]
-}
-```
+## ERC20 Contract
 
-## dapp
+Ropsten: 0xa45183513F9EbB4092434a69Bb6c4aE884CF9702
 
-- scaffold nextjs project at packages/dapp
+- https://ropsten.etherscan.io/address/0xa45183513F9EbB4092434a69Bb6c4aE884CF9702
 
-```
-npx create-next-app@latest --typescript
-```
+# ERC20Faucet contract
 
-- change name/version in package.json for later cross package referencing:
+Ropsten: 0xd10439b0CD3c1e0579c742E95d45b56067c01a11
 
-```json
-{
-  "name": "@demo-dapp-erc20/dapp",
-  "version": "1.0.0"
-}
-```
-
-Note: rm -rf .git created by nextjs scaffolding
-
-## hardhat
-
-- create package.json at packages/hardhat
-
-```json
-{
-  "name": "@demo-dapp-erc20/hardhat",
-  "version": "1.0.0"
-}
-```
-
-- add hardhat local dev depency
-
-```
-npm install --save-dev hardhat
-```
-
-- scaffold hardhat ts project
-
-```
-npx hardhat
-```
+- https://ropsten.etherscan.io/address/0xd10439b0CD3c1e0579c742E95d45b56067c01a11

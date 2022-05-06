@@ -7,7 +7,9 @@
     "compile": "npx hardhat compile",
     "test": "npx hardhat test",
     "deploy:erc20:localhost": "npx hardhat run scripts/deploy-erc20.ts --network localhost",
-    "deploy:erc20:ropsten": "npx hardhat run scripts/deploy-erc20.ts --network ropsten"
+    "deploy:erc20:ropsten": "npx hardhat run scripts/deploy-erc20.ts --network ropsten",
+    "deploy:erc20Faucet:localhost": "npx hardhat run scripts/deploy-erc20Faucet.ts --network localhost",
+    "deploy:erc20Faucet:ropsten": "npx hardhat run scripts/deploy-erc20Faucet.ts --network ropsten"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.5",
