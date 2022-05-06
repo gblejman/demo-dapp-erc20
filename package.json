@@ -1,8 +1,6 @@
 {
-  "name": "@demo-dapp-erc20",
   "private": true,
   "workspaces": [
-    "packages/dapp",
-    "packages/hardhat"
+    "packages/*"
   ]
 }
